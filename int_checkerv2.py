@@ -5,18 +5,24 @@ def get_sha256(path):
     return subprocess.run(["sha256sum", path], capture_output=True, text=True).stdout.split()[0]
 
 def get_sha256_windows(path):
-    """Hash SHA-256 para Windows usando certutil"""
+    import os
+    # Convierte la ruta a absoluta y reemplaza \ por /
+    path = os.path.abspath(path).replace("\\", "/")
     try:
         result = subprocess.run(["certutil", "-hashfile", path, "SHA256"],
                                 capture_output=True, text=True, check=True)
         lines = result.stdout.splitlines()
-        return lines[1].replace(" ", "")
+        # Filtramos la primera línea que contiene 'SHA256 hash of file ...'
+        # y la última que dice 'CertUtil: -hashfile command completed successfully.'
+        hash_line = [line for line in lines if all(c in "0123456789abcdefABCDEF" for c in line.replace(" ", ""))]
+        return hash_line[0].replace(" ", "")
     except subprocess.CalledProcessError:
         print(f"Error calculando hash del archivo: {path}")
         exit(1)
     except IndexError:
         print(f"No se pudo extraer el hash de la salida de certutil para: {path}")
         exit(1)
+
 
 def seleccionar_os():
     print("Selecciona tu sistema operativo:")
