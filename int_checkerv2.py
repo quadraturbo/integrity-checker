@@ -22,8 +22,7 @@ def get_sha256_windows(path):
     except IndexError:
         print(f"No se pudo extraer el hash de la salida de certutil para: {path}")
         exit(1)
-
-
+        
 def seleccionar_os():
     print("Selecciona tu sistema operativo:")
     print("1. Windows")
