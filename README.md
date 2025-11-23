@@ -11,6 +11,9 @@ A Python script to verify file integrity using SHA-256 hash, compatible with Win
 
 `int_checkerv2.py` is a command-line tool that allows you to compare two files to determine if they have been modified. It uses the SHA-256 algorithm to calculate and compare file hashes, providing a reliable way to detect any changes in their content.
 
+### Note
+While using this tool ,ensure to add the extensions of the files to compare.
+
 ## Features
 
 - **Cross-platform**: Works on Windows and Linux
@@ -32,7 +35,7 @@ A Python script to verify file integrity using SHA-256 hash, compatible with Win
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/your-username/file-integrity-checker.git
+git clone https://github.com/quadraturbo/file-integrity-checker.git
 cd file-integrity-checker
 ```
 
